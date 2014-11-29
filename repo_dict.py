@@ -2,11 +2,11 @@ __author__ = 'TPei'
 from github3 import login, GitHub
 
 
-def get_language_bytes(user):
+def get_repo_bytes(user):
     """
-    count all language usage of a github user
+    count bytes of code per repo
     :param user: user to get language counts for
-    :return: language: byte dictionary, total bytecount
+    :return: repo: byte dictionary, total bytecount
     """
     # instead of this, just enter your credentials in variables
     from handle_credentials import username
@@ -25,32 +25,31 @@ def get_language_bytes(user):
     # get languages for al user repos
     for repo in user_repos:
         for lang in repo.iter_languages():
-            #print(repo, lang)
-            language_stats.append(lang)
+            language_stats.append((repo.name, lang[1]))
             total_count += lang[1]
 
     # create a language: bytes dictionary
-    lang_dict = {}
+    repo_dict = {}
     for lang in language_stats:
-        if lang[0] in lang_dict:
-            lang_dict[lang[0]] += lang[1]
+        if lang[0] in repo_dict:
+            repo_dict[lang[0]] += lang[1]
         else:
-            lang_dict[lang[0]] = lang[1]
+            repo_dict[lang[0]] = lang[1]
 
-    return lang_dict, total_count
+    return repo_dict, total_count
 
 
-def get_lang_percentages(user):
+def get_repo_percentages(user):
     """
-    get language use percentages for a github user
+    get repo language percentages for a github user
     :param user: user to stalk
     :return: language: usage percentage, total bytecount of all languages
     """
-    lang_dict, total_count = get_language_bytes(user)
+    lang_dict, total_count = get_repo_bytes(user)
     for key in lang_dict.keys():
         lang_dict[key] = lang_dict[key] / total_count * 100
 
     return lang_dict, total_count
 
 if __name__ == '__main__':
-    print(get_repo_bytes('tpei'))
+    print(get_repo_percentages('tpei'))
