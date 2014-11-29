@@ -54,6 +54,15 @@ def visualize_percentages(user):
 
 
 def create_bar_chart(title, ylabel, keys, values, user):
+    """
+    creates a bar chart for the given data
+    :param title: title to display
+    :param ylabel: ylabel text
+    :param keys: names for the bars
+    :param values: values to create bars for
+    :param user: the user which we are visualizing here
+    :return:
+    """
     fig = plt.figure('github_' + user)
     ax = fig.add_subplot(111)
 
@@ -63,7 +72,7 @@ def create_bar_chart(title, ylabel, keys, values, user):
     width = 0.5
 
     ## the bars
-    date_bars = ax.bar(ind, values, width)
+    ax.bar(ind, values, width)
 
     # axes and labels
     ax.set_xlim(-width, len(ind)+width)
@@ -77,4 +86,4 @@ def create_bar_chart(title, ylabel, keys, values, user):
     plt.show()
 
 if __name__ == '__main__':
-    visualize_bytes('tpei')
+    visualize_percentages('tpei')
