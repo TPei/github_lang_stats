@@ -22,13 +22,13 @@ def visualize(user):
         values.append(i[1])
 
 
-    fig = plt.figure()
+    fig = plt.figure('Github_' + user)
     ax = fig.add_subplot(111)
 
 
     ## necessary variables
-    ind = np.arange(len(values))                # the x locations for the groups
-    width = 0.5              # the width of the bars
+    ind = np.arange(len(values))
+    width = 0.5
 
     ## the bars
     date_bars = ax.bar(ind, values, width)
@@ -36,8 +36,8 @@ def visualize(user):
     # axes and labels
     ax.set_xlim(-width, len(ind)+width)
     ax.set_ylim(0, max(values) + 10)
-    ax.set_ylabel('% of all users\' languages')
-    ax.set_title('Language Percentages')
+    ax.set_ylabel('% of all languages used by ' + user)
+    ax.set_title('Github Language Percentages for ' + user)
     xTickMarks = keys
     ax.set_xticks(ind+width)
     xtickNames = ax.set_xticklabels(xTickMarks)
