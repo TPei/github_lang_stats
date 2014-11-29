@@ -52,6 +52,7 @@ def visualize_lang_percentages(user):
         values.append(i[1])
 
     create_bar_chart('Github Language Percentages for ' + user + "\nTotal bytes of code: " + '{0:,}'.format(bytes), '% of all languages used by ' + user, keys, values, user)
+    #render_pie_chart('Github Language Percentages for ' + user + "\nTotal bytes of code: " + '{0:,}'.format(bytes), keys, values)
 
 
 def visualize_repo_bytes(user):
@@ -121,7 +122,7 @@ def create_bar_chart(title, ylabel, keys, values, user):
     width = 0.5
 
     ## the bars
-    ax.bar(ind, values, width)
+    ax.bar(ind, values, width, alpha=0.7, color='r')
 
     # axes and labels
     ax.set_xlim(-width, len(ind)+width)
@@ -133,3 +134,28 @@ def create_bar_chart(title, ylabel, keys, values, user):
     xtickNames = ax.set_xticklabels(xTickMarks)
     plt.setp(xtickNames, rotation=-45, fontsize=10)
     plt.show()
+
+
+def render_pie_chart(title, keys, values):
+    """
+    create pie chart
+    :param title: title of chart
+    :param keys: lables
+    :param values: values
+    :return:
+    """
+    fig = plt.figure(title)
+    labels = keys
+    sizes = values
+    #colors = ['yellowgreen', 'gold', 'lightskyblue', 'lightcoral']
+    #explode = (0, 0.1, 0, 0) # only "explode" the 2nd slice (i.e. 'Hogs')
+
+    plt.pie(sizes, labels=labels,
+            autopct='%1.1f%%', shadow=True, startangle=90)
+    # Set aspect ratio to be equal so that pie is drawn as a circle.
+    plt.axis('equal')
+
+    plt.show()
+
+if __name__ == '__main__':
+    visualize_lang_percentages('tpei')
