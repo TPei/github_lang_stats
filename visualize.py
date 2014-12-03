@@ -127,7 +127,7 @@ def create_bar_chart(title, ylabel, keys, values, user):
         bars = ax.bar(ind, values, width, alpha=0.7, color='r')
         for rect in bars:
             height = rect.get_height()
-            ax.text(rect.get_x()+rect.get_width()/2., offset+height, '%d'%int(height),
+            ax.text(rect.get_x()+rect.get_width()/2., offset+height, '%.2f' % height,
                     ha='center', va='bottom')
 
         # axes and labels
