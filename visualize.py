@@ -121,19 +121,27 @@ def create_bar_chart(title, ylabel, keys, values, user):
     ind = np.arange(len(values))
     width = 0.5
 
-    ## the bars
-    ax.bar(ind, values, width, alpha=0.7, color='r')
+    try:
+        offset = max(values) / 20
+        ## the bars
+        bars = ax.bar(ind, values, width, alpha=0.7, color='r')
+        for rect in bars:
+            height = rect.get_height()
+            ax.text(rect.get_x()+rect.get_width()/2., offset+height, '%d'%int(height),
+                    ha='center', va='bottom')
 
-    # axes and labels
-    ax.set_xlim(-width, len(ind)+width)
-    ax.set_ylim(0, max(values) + max(values) / 10)
-    ax.set_ylabel(ylabel)
-    ax.set_title(title)
-    xTickMarks = keys
-    ax.set_xticks(ind+width)
-    xtickNames = ax.set_xticklabels(xTickMarks)
-    plt.setp(xtickNames, rotation=-45, fontsize=10)
-    plt.show()
+        # axes and labels
+        ax.set_xlim(-width, len(ind)+width)
+        ax.set_ylim(0, max(values) + max(values) / 10)
+        ax.set_ylabel(ylabel)
+        ax.set_title(title)
+        xTickMarks = keys
+        ax.set_xticks(ind+(width/2))
+        xtickNames = ax.set_xticklabels(xTickMarks)
+        plt.setp(xtickNames, rotation=-45, fontsize=10)
+        plt.show()
+    except ValueError:
+        print("no data was found")
 
 
 def render_pie_chart(title, keys, values):
