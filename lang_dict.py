@@ -20,7 +20,11 @@ def get_language_bytes(user):
     # put all user repos in list
     # iter_user_repos without private repos
     # iter_repos includes private repos
-    user_repos = [f for f in g.iter_repos(user.login)]
+    if username.lower() == user.name.lower():
+        user_repos = [f for f in g.iter_repos(user.login)]
+    else:
+        user_repos = [f for f in g.iter_user_repos(user.login)]
+
     language_stats = []
     total_count = 0
 
@@ -55,4 +59,4 @@ def get_lang_percentages(user):
     return lang_dict, total_count
 
 if __name__ == '__main__':
-    print(get_lang_percentages('tpei'))
+    print(get_language_bytes('tpei'))

@@ -12,5 +12,5 @@ except OSError:
     username = input('username: ')
     pw = input('password: ')
 
-username = username.replace('\n', ' ').replace('\r', '')
-pw = pw.replace('\n', ' ').replace('\r', '')
+username = username.replace('\n', '').replace('\r', '')
+pw = pw.replace('\n', '').replace('\r', '')
