@@ -18,7 +18,11 @@ def get_repo_bytes(user):
     user = g.user(user)
 
     # put all user repos in list
-    user_repos = [f for f in g.iter_repos(user.login)]
+    #user_repos = [f for f in g.iter_repos(user.login)]
+    if username.lower() == user.name.lower():
+        user_repos = [f for f in g.iter_repos(user.login)]
+    else:
+        user_repos = [f for f in g.iter_user_repos(user.login)]
     language_stats = []
     total_count = 0
 
