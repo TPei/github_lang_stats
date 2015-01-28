@@ -15,26 +15,32 @@ def get_language_bytes(user):
     g = login(username, password=pw)
 
     # get user to /stalk
+    print("finding user...")
     user = g.user(user)
+    print("found user...")
 
     # put all user repos in list
     # iter_user_repos without private repos
     # iter_repos includes private repos
+    print("fetching user repos...")
     if username.lower() == user.name.lower():
         user_repos = [f for f in g.iter_repos(user.login)]
     else:
         user_repos = [f for f in g.iter_user_repos(user.login)]
-
+    print("received user repos...")
     language_stats = []
     total_count = 0
 
+    print("sorting languages per repo...")
     # get languages for al user repos
     for repo in user_repos:
         for lang in repo.iter_languages():
             #print(repo, lang)
             language_stats.append(lang)
             total_count += lang[1]
+        print("finished repo, '" + repo.name + "' moving on to the next one...")
 
+    print("calculating language sizes...")
     # create a language: bytes dictionary
     lang_dict = {}
     for lang in language_stats:

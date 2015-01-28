@@ -73,8 +73,9 @@ def visualize_repo_bytes(user):
 
     # put into two lists for visualisation (x labels and values)
     for i in percentages:
-        keys.append(i[0])
-        values.append(i[1])
+        if len(values) <= 10:
+            keys.append(i[0])
+            values.append(i[1])
 
     create_bar_chart('Github Repo Bytes for ' + user + "\nTotal bytes of code: " + '{0:,}'.format(bytes), 'bytes of all repos used by ' + user, keys, values, user)
 
@@ -97,8 +98,9 @@ def visualize_repo_percentages(user):
 
     # put into two lists for visualisation (x labels and values)
     for i in percentages:
-        keys.append(i[0])
-        values.append(i[1])
+        if len(values) <= 10:
+            keys.append(i[0])
+            values.append(i[1])
 
     create_bar_chart('Github Repo Percentages for ' + user + "\nTotal bytes of code: " + '{0:,}'.format(bytes), '% of all repo code used by ' + user, keys, values, user)
 
