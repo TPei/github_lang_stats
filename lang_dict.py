@@ -38,7 +38,7 @@ def get_language_bytes(user):
             #print(repo, lang)
             language_stats.append(lang)
             total_count += lang[1]
-        print("finished repo, '" + repo.name + "' moving on to the next one...")
+        print("finished repo '" + repo.name + "' moving on to the next one...")
 
     print("calculating language sizes...")
     # create a language: bytes dictionary
